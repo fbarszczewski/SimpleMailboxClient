@@ -1,18 +1,21 @@
 ﻿using MailKit;
 using MailKit.Net.Imap;
+using SimpleMailboxClient.Entities;
 
 namespace SimpleMailboxClient.ImapServices;
 
 public class ImapMonitor : IDisposable
 {
     private readonly ImapClientProvider _clientProvider;
+    private readonly int _idleTimeout;
     private ImapClient _client;
     private CancellationTokenSource _cancelMonitor;
     private CancellationTokenSource _doneIdle;
 
-    public ImapMonitor(ImapClientProvider clientProvider)
+    public ImapMonitor(EmailConfig emailConfig)
     {
-        _clientProvider = clientProvider;
+        _idleTimeout = emailConfig.ImapConfig!.IdleTimeout;
+        _clientProvider = new ImapClientProvider(emailConfig);
     }
     public event EventHandler<EventArgs> NewMail;
     public event EventHandler<EventArgs> RemovedMail;
@@ -78,7 +81,7 @@ public class ImapMonitor : IDisposable
                     // Note: IMAP servers are only supposed to drop the connection after 30 minutes, so normally
                     // we'd IDLE for a max of, say, ~29 minutes... but GMail seems to drop idle connections after
                     // about 10 minutes, so we'll only idle for 9 minutes.
-                    _doneIdle = new CancellationTokenSource(new TimeSpan(0, 9, 0));
+                    _doneIdle = new CancellationTokenSource(new TimeSpan(0, _idleTimeout, 0));
                     try
                     {
                         await _client.IdleAsync(_doneIdle.Token, _cancelMonitor.Token);
