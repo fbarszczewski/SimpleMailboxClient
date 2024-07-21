@@ -1,4 +1,4 @@
-﻿namespace ConsoleMailbox.Entities;
+﻿namespace SimpleMailboxClient.Entities;
 
 public class EmailAccount
 {
@@ -13,7 +13,8 @@ public class ImapConfig
     public required string Server { get; set; }
     public required int Port { get; set; }
     public EncryptionType SecurityProtocol { get; set; } = EncryptionType.SSL;
-    public int IdleTimeout { get; set; } = 60000;
+    // In Minutes
+    public int IdleTimeout { get; set; } = 9;
 }
 
 public class SmtpConfig
