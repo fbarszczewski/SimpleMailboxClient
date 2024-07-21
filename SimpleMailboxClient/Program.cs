@@ -1,4 +1,5 @@
-﻿using SimpleMailboxClient.Utilities;
+﻿using SimpleMailboxClient.ImapServices;
+using SimpleMailboxClient.Utilities;
 
 namespace SimpleMailboxClient
 {
@@ -15,22 +16,22 @@ namespace SimpleMailboxClient
 
 
 
-            //using (var client = new ImapMonitor(new ImapClientProvider(fufuAccount)))
-            //{
-            //    Console.WriteLine("Hit any key to end the demo.");
+            using (var client = new ImapMonitor(emailConfig))
+            {
+                Console.WriteLine("Hit any key to end the demo.");
 
-            //    var idleTask = client.MonitorAsync();
+                var idleTask = client.MonitorAsync();
 
-            //    Task.Run(() =>
-            //    {
-            //        Console.ReadKey(true);
-            //    }).Wait();
+                Task.Run(() =>
+                {
+                    Console.ReadKey(true);
+                }).Wait();
 
-            //    client.Exit();
+                client.Exit();
 
 
-            //    idleTask.GetAwaiter().GetResult();
-            //}
+                idleTask.GetAwaiter().GetResult();
+            }
 
         }
     }
