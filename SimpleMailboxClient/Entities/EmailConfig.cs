@@ -1,6 +1,6 @@
 ﻿namespace SimpleMailboxClient.Entities;
 
-public class EmailAccount
+public class EmailConfig
 {
     public required string Username { get; set; }
     public required string Password { get; set; }

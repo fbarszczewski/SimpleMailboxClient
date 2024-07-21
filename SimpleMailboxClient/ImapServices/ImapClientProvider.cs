@@ -32,19 +32,19 @@ public class ImapClientProvider
         }
     }
 
-    public ImapClientProvider(EmailAccount emailAccount)
+    public ImapClientProvider(EmailConfig emailConfig)
     {
-        if (emailAccount.ImapConfig == null)
-            throw new ArgumentNullException(nameof(emailAccount.ImapConfig), "ImapConfig cannot be null.");
+        if (emailConfig.ImapConfig == null)
+            throw new ArgumentNullException(nameof(emailConfig.ImapConfig), "ImapConfig cannot be null.");
 
-        if (string.IsNullOrWhiteSpace(emailAccount.Username) || string.IsNullOrWhiteSpace(emailAccount.Password))
-            throw new ArgumentNullException(nameof(emailAccount), "Username & Password cannot be null.");
+        if (string.IsNullOrWhiteSpace(emailConfig.Username) || string.IsNullOrWhiteSpace(emailConfig.Password))
+            throw new ArgumentNullException(nameof(emailConfig), "Username & Password cannot be null.");
 
-        _host = emailAccount.ImapConfig.Server;
-        _port = emailAccount.ImapConfig.Port;
-        _username = emailAccount.Username;
-        _password = emailAccount.Password;
-        _encryptionType = emailAccount.ImapConfig.SecurityProtocol;
+        _host = emailConfig.ImapConfig.Server;
+        _port = emailConfig.ImapConfig.Port;
+        _username = emailConfig.Username;
+        _password = emailConfig.Password;
+        _encryptionType = emailConfig.ImapConfig.SecurityProtocol;
         _client = new ImapClient();
     }
 
