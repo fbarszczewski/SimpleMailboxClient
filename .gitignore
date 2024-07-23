@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /SimpleMailboxClient/Config/mailSettings.json
+/SimpleMailboxClient/Config/mailSettings2.json
