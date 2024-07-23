@@ -16,8 +16,11 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<None Update="Config\mailSettings2.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Config\mailSettings.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 

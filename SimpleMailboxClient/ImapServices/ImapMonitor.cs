@@ -37,7 +37,7 @@ public class ImapMonitor : IDisposable
         inbox.CountChanged += OnCountChanged;
         inbox.MessageExpunged += OnMessageExpunged;
         inbox.MessageFlagsChanged += OnMessageFlagsChanged;
-
+        Console.WriteLine("## Starting monitoring mailbox..");
         await EnterIdle();
 
         inbox.MessageFlagsChanged -= OnMessageFlagsChanged;
