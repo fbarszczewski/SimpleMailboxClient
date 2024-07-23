@@ -17,6 +17,7 @@ public class SettingsLoader
             .AddJsonFile("mailSettings.json", false, true)
             .Build();
 
+
         return configuration.GetSection("EmailConfig").Get<EmailConfig>();
     }
 }
